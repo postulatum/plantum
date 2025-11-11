@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onImport }) => {
                         </button>
                     )}
                     <a
-                        href="https://github.com/laxerhd/semester-planer"
+                        href="https://github.com/postulatum/plantum"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white hover:text-gray-200 transition-colors"

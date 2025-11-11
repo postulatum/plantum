@@ -17,7 +17,7 @@ This method automatically deploys your site whenever you push to the `main` bran
 #### Setup Steps:
 
 1. **Enable GitHub Pages with GitHub Actions:**
-   - Go to your GitHub repository: https://github.com/laxerhd/semester-planer
+   - Go to your GitHub repository: https://github.com/postulatum/plantum
    - Click on "Settings" (top menu)
    - Click on "Pages" in the left sidebar
    - Under "Build and deployment":
@@ -40,7 +40,7 @@ This method automatically deploys your site whenever you push to the `main` bran
 4. **Access Your Site:**
    - Once deployed, your site will be available at:
      ```
-     https://laxerhd.github.io/semester-planer/
+     https://postulatum.github.io/semester-planer/
      ```
 
 #### How It Works:
