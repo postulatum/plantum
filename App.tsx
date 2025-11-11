@@ -1,0 +1,106 @@
+import React, { useState, useEffect, useMemo } from "react";
+import type { Module } from "./model/types";
+import { AreaCategory } from "./model/types";
+import {
+    TOTAL_CREDITS_GOAL,
+    CATEGORY_GOALS,
+    LOCAL_STORAGE_KEYS,
+    GLOBAL_APP_VERSION,
+} from "./data/constants";
+import Header from "./components/Header";
+import ModuleForm from "./components/ModuleForm";
+import ModuleList from "./components/ModuleList";
+import Dashboard from "./components/Dashboard";
+import Overview from "./components/Overview";
+import SemesterManager from "./components/SemesterManager";
+import {
+    loadFromLocalStorage,
+    saveToLocalStorage,
+} from "./services/localStorageService";
+
+type View = "planner" | "overview";
+
+const App: React.FC = () => {
+    const handleExport = () => {
+        const data = {
+            GLOBAL_APP_VERSION,
+            modules,
+            semesters,
+            exportDate: new Date().toISOString(),
+        };
+
+        const jsonString = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonString], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `master-planer-backup-${new Date().toISOString().split("T")[0]}.json`;
+        link.click();
+        URL.revokeObjectURL(url);
+    };
+
+    const handleImport = (file: File) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const content = e.target?.result as string;
+                const data = JSON.parse(content);
+
+                if (data.modules && Array.isArray(data.modules)) {
+                    const isConfirmed = window.confirm(
+                        "Möchten Sie die aktuellen Daten wirklich mit den importierten Daten ersetzen? Diese Aktion kann nicht rückgängig gemacht werden.",
+                    );
+
+                    if (isConfirmed) {
+                        setModules(data.modules);
+                        if (data.semesters && Array.isArray(data.semesters)) {
+                            setSemesters(data.semesters);
+                        }
+                        alert("Daten erfolgreich importiert!");
+                    }
+                } else {
+                    alert(
+                        'Ungültige JSON-Datei. Die Datei muss ein "modules"-Array enthalten.',
+                    );
+                }
+            } catch (error) {
+                console.error("Import error:", error);
+                alert(
+                    "Fehler beim Importieren der Datei. Bitte stellen Sie sicher, dass es sich um eine gültige JSON-Datei handelt.",
+                );
+            }
+        };
+        reader.readAsText(file);
+    };
+
+    const addModule = (v) => {console.log(v);}
+    const updateModule = (v) => {console.log(v);}
+    const handleCancelEdit = (v) => {console.log(v);}
+    const editingModule = {} 
+
+    return (
+        <div className="min-h-screen bg-gray-50 text-gray-800">
+            <Header onExport={handleExport} onImport={handleImport} />
+
+            <main className="container mx-auto p-4 md:p-8">
+                <ModuleForm
+                    onAddModule={addModule}
+                    onUpdateModule={updateModule}
+                    onCancelEdit={handleCancelEdit}
+                    editingModule={editingModule}
+                />
+            </main>
+
+            <footer className="container mx-auto px-4 md:px-8 py-6 text-center text-xs text-gray-500">
+                <p>
+                    Dieses Tool dient nur zur persönlichen Planung. Es wird
+                    keine Garantie auf Korrektheit oder Vollständigkeit der
+                    Informationen gegeben. Bitte überprüfen Sie alle Angaben mit
+                    den offiziellen TUM-Dokumenten und Ihrer Studienberatung.
+                </p>
+            </footer>
+        </div>
+    );
+};
+
+export default App;
