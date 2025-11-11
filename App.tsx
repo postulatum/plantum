@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import type { Module } from "./model/types";
-import { AreaCategory } from "./model/types";
+import { AreaCategory, Semester } from "./model/types";
 import {
     TOTAL_CREDITS_GOAL,
     CATEGORY_GOALS,
@@ -8,11 +8,13 @@ import {
     GLOBAL_APP_VERSION,
 } from "./data/constants";
 import Header from "./components/Header";
-import ModuleForm from "./components/ModuleForm";
 import ModuleList from "./components/ModuleList";
 import Dashboard from "./components/Dashboard";
 import Overview from "./components/Overview";
 import SemesterManager from "./components/SemesterManager";
+import { Slot } from "./model/types";
+import SlotList from "./components/SlotList";
+import ModuleForm from "./components/ModuleForm";
 import {
     loadFromLocalStorage,
     saveToLocalStorage,
@@ -73,16 +75,27 @@ const App: React.FC = () => {
         reader.readAsText(file);
     };
 
-    const addModule = (v) => {console.log(v);}
-    const updateModule = (v) => {console.log(v);}
-    const handleCancelEdit = (v) => {console.log(v);}
-    const editingModule = {} 
+    const addModule = (v) => { console.log(v); }
+    const updateModule = (v) => { console.log(v); }
+    const handleCancelEdit = (v) => { console.log(v); }
+    const editingModule = {}
+
+    // TODO: Remove Dummy slots
+    let slots: Slot[] = [
+        new Slot(2025, "WiSe", [new Semester("Semester 1"), new Semester("Semester 2")]),
+        new Slot(2026, "SoSe", []),
+    ];
+
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-800">
             <Header onExport={handleExport} onImport={handleImport} />
 
             <main className="container mx-auto p-4 md:p-8">
+                <h2 className="text-lg font-semibold">Slots</h2>
+                <SlotList slots={slots} />
+
+                {/*TODO: Implement ModuleForm inside the slot*/}
                 <ModuleForm
                     onAddModule={addModule}
                     onUpdateModule={updateModule}
