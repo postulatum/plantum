@@ -1,23 +1,17 @@
-# TUM Master Credit Tracker
+# planTUM
 
-Ein Webtool zur Verwaltung und Planung von Master-Modulen an der TUM (Technische Universität München).
+Ein Webtool zur Verwaltung und Planung von Master-Modulen für Informatik Studenten der TUM (Technische Universität München).
 
 ## Features
 
-- ✅ Module hinzufügen und verwalten
-- ✅ Semester organisieren
+- ✅ Semester übersicht
+- ✅ Semester als Skill-Tree organisieren
 - ✅ Fortschrittsübersicht mit Kreditpunkten
 - ✅ Automatische Spezialisierungserkennung
-- ✅ **Automatisches Speichern im Browser (LocalStorage)**
+- ✅ **Automatisches Speichern im lokalen Speicher des Browsers**
 - ✅ Export/Import von Daten als JSON
 
-## Installation
-
-```bash
-npm install
-```
-
-## Verwendung
+## Lokale Verwendung
 
 ### Starten der Anwendung
 
@@ -25,7 +19,7 @@ npm install
 npm run dev
 ```
 
-Dann öffnen Sie: http://localhost:5173
+Dann öffnen Sie: http://localhost:3000
 
 ## Datenspeicherung
 
@@ -33,29 +27,6 @@ Die Anwendung speichert Daten automatisch im Browser-LocalStorage:
 
 - **Automatisches Speichern**: Alle Änderungen werden sofort lokal gespeichert
 - **Export/Import**: Über die Buttons im Header können Sie Ihre Daten als JSON-Datei exportieren oder importieren
-
-### Export-Datenstruktur
-
-Wenn Sie Ihre Daten exportieren, wird folgende JSON-Struktur erstellt:
-
-```json
-{
-  "modules": [
-    {
-      "id": "...",
-      "name": "Modulname",
-      "credits": 5,
-      "area": "Bereich",
-      "semester": "WS 2024/25",
-      "isTheoretical": false,
-      "customCategory": "Informatik Wahlmodule",
-      "customInformaticsArea": "Machine Learning and Analytics"
-    }
-  ],
-  "semesters": ["WS 2024/25", "SS 2025"],
-  "exportDate": "2025-10-09T..."
-}
-```
 
 ## Build
 
@@ -67,28 +38,28 @@ npm run build
 
 ### Automatic Deployment (Recommended)
 
-The project is configured with GitHub Actions for automatic deployment. Every push to the `main` branch will automatically build and deploy to GitHub Pages.
+Dieses Projekt ist so konfiguriert, dass ein Push auf `master` direkt auf den Github-Pages deployt.
 
 **Setup Steps:**
 
-1. Go to your GitHub repository Settings
-2. Navigate to "Pages" in the left sidebar
-3. Under "Build and deployment":
-   - Source: Select "GitHub Actions"
-4. Push to the `main` branch - the site will deploy automatically!
+1. Gehe zu den Einstellung des Repositories
+2. Gehe zu "Pages" in der linken Sidebar
+3. Unter "Build and deployment":
+   - Source: "GitHub Actions"
+4. Nun sollte dank der `.github/workflows/deploy.yaml` ein Push auf `master` die Seite deployn!
 
-The site will be available at: `https://laxerhd.github.io/master-planer/`
+Siehe: `https://postulatum.github.io/plantum/` für das Ergebnis.
 
 ### Manual Deployment
 
-Alternatively, you can deploy manually:
+Alternativ kann auch manuell deployed werden. Dabei kann es notwendig sein `node_modules/.cache/gh-pages` zu löschen.
 
 ```bash
 npm install gh-pages --save-dev
 npm run deploy
 ```
 
-This will build and deploy to the `gh-pages` branch.
+Dies baut den aktuellen Branch und auf den `gh-pages` branch.
 
 ## Technologie-Stack
 
