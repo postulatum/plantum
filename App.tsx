@@ -81,11 +81,15 @@ const App: React.FC = () => {
     const editingModule = {}
 
     // TODO: Remove Dummy slots
-    let slots: Slot[] = [
-        new Slot(2025, "WiSe", [new Semester("Semester 1"), new Semester("Semester 2")]),
-        new Slot(2026, "SoSe", []),
-    ];
+    const [slots, setSlots] = useState([
+        { id: crypto.randomUUID(), year: 2025, term: "WiSe", semesters: [] },
+        { id: crypto.randomUUID(), year: 2026, term: "SoSe", semesters: [] },
+    ]);
 
+    function handleAddSemester(slot: Slot, semester: Semester) {
+        const updatedSlot: Slot = {...slot, semesters: [...slot.semesters, semester]};
+        setSlots(prevSlots => prevSlots.map(sl => sl.id === slot.id ? updatedSlot : sl));
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-800">
@@ -93,7 +97,7 @@ const App: React.FC = () => {
 
             <main className="container mx-auto p-4 md:p-8">
                 <h2 className="text-lg font-semibold">Slots</h2>
-                <SlotList slots={slots} />
+                <SlotList slots={slots} handleAddSemester={handleAddSemester} />
 
                 {/*TODO: Implement ModuleForm inside the slot*/}
                 <ModuleForm

@@ -9,33 +9,6 @@ export enum Category {
     MISC = 'Sonstiges',
 }
 
-
-export class Semester {
-    id: string;
-    name: string;
-    modules: Module[];
-
-    constructor(name: string, modules: Module[] = []) {
-        this.id = crypto.randomUUID();
-        this.name = name;
-        this.modules = modules;
-    }
-}
-
-type Term = 'WiSe' | 'SoSe';
-
-export class Slot {
-    year: number;
-    term: Term;
-    semesters: Semester[];
-
-    constructor(year: number, term: Term, semesters: Semester[] = []) {
-        this.year = year;
-        this.term = term;
-        this.semesters = semesters;
-    }
-}
-
 export enum Area {
     ALG = 'ALG - Algorithms',
     CGV = 'CGV - Computer Graphics and Vision',
@@ -57,19 +30,25 @@ export enum Area {
     MISC = 'Anderes (z.B. Bachelor-Anerkennung)',
 }
 
+type Term = 'WiSe' | 'SoSe';
 
-export class Module {
+export interface Slot {
+    id: string
+    year: number;
+    term: Term;
+    semesters: Semester[];
+}
+
+export interface Semester {
+    id: string;
+    name: string;
+    modules: Module[];
+}
+
+export interface Module {
     id: string;
     name: string;
     credits: number;
     area: Area;
-    isTheoretical: boolean = false;
-
-    constructor(name: string, credits: number, area: Area, isTheoretical: boolean = false) {
-        this.id = crypto.randomUUID();
-        this.name = name;
-        this.credits = credits;
-        this.area = area;
-        this.isTheoretical = isTheoretical;
-    }
+    isTheoretical: boolean;
 }
