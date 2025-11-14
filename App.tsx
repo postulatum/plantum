@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import type { Module } from "./model/types";
-import { AreaCategory, Semester } from "./model/types";
+import { Area, AreaCategory, Category, Semester } from "./model/types";
 import {
     TOTAL_CREDITS_GOAL,
     CATEGORY_GOALS,
     LOCAL_STORAGE_KEYS,
     GLOBAL_APP_VERSION,
 } from "./data/constants";
+import { newModule, newSemester } from "./utils/factory";
 import Header from "./components/Header";
 import ModuleList from "./components/ModuleList";
 import Dashboard from "./components/Dashboard";
@@ -80,14 +81,18 @@ const App: React.FC = () => {
     const handleCancelEdit = (v) => { console.log(v); }
     const editingModule = {}
 
+
+    const testModule: Module = newModule("Testmodul", 5, Area.ALG, true);
+    const testSemester: Semester = newSemester("Testsemester", [testModule]);
+
     // TODO: Remove Dummy slots
-    const [slots, setSlots] = useState([
-        { id: crypto.randomUUID(), year: 2025, term: "WiSe", semesters: [] },
+    const [slots, setSlots] = useState<Slot[]>([
+        { id: crypto.randomUUID(), year: 2025, term: "WiSe", semesters: [testSemester] },
         { id: crypto.randomUUID(), year: 2026, term: "SoSe", semesters: [] },
     ]);
 
     function handleAddSemester(slot: Slot, semester: Semester) {
-        const updatedSlot: Slot = {...slot, semesters: [...slot.semesters, semester]};
+        const updatedSlot: Slot = { ...slot, semesters: [...slot.semesters, semester] };
         setSlots(prevSlots => prevSlots.map(sl => sl.id === slot.id ? updatedSlot : sl));
     }
 

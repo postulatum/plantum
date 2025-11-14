@@ -7,11 +7,11 @@ interface SlotListProps {
     handleAddSemester: (slot: Slot, semester: Semester) => void;
 }
 
-const SlotList: React.FC<SlotListProps> = ({ slots, handleAddSemester }: SlotListProps) => {
+function SlotList({ slots, handleAddSemester }: SlotListProps) {
     return (
         <div className="flex flex-col gap-4">
             {slots.map((slot, idx) => (
-                <div key={slot.id} className="p-4 bg-white rounded-lg shadow-sm">
+                <div key={slot.id} className="p-4 bg-gray rounded-lg shadow-xl">
                     <div className="flex items-center justify-between">
                         <div>
                             {slot.term} {slot.year}

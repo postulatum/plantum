@@ -1,14 +1,15 @@
 import React, {useState} from "react";
 import type { Slot, Semester } from "../model/types";
+import SemesterCard from "./SemesterCard";
 
 interface SemesterListProps {
     slot: Slot;
     handleAddSemester?: (slot: Slot, semester: Semester) => void;
 }
 
-const SemesterList: React.FC<SemesterListProps> = ({ slot, handleAddSemester }: SemesterListProps) => {
+function SemesterList({ slot, handleAddSemester }: SemesterListProps) {
     // TODO: Later use ActivatedState to choose a semester
-    const [activatedSemesterId, setActivatedSemesterId] = useState<string | null>(null);
+    const [activeSemesterId, setActiveSemesterId] = useState<string | null>(null);
 
     function onAddSemester(semesterName: string) {
         const newSemester: Semester = { id: crypto.randomUUID(), name: semesterName, modules: [] };
@@ -22,9 +23,7 @@ const SemesterList: React.FC<SemesterListProps> = ({ slot, handleAddSemester }: 
             ) : (
                 <div className="flex flex-row gap-4">
                     {slot.semesters.map((semester, idx) => (
-                        <div key={semester.id} className="p-4 bg-white rounded-lg shadow-sm">
-                            {semester.name}
-                        </div>
+                        <SemesterCard semester={semester} />
                     ))}
                 </div>
             )}
