@@ -11,7 +11,7 @@ function SemesterList({ slot }: SemesterListProps) {
     const [activeSemesterId, setActiveSemesterId] = useState<string | null>(null);
 
     return (
-        <div>
+        <div className="overflow-y-auto">
             {slot.semesters.length === 0 ? (
                 <div className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg">
                     <p className="text-gray-500 text-sm">Keine Semester in diesem Slot.</p>

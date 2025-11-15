@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import type { Module } from "./model/types";
+import type { Module, Term } from "./model/types";
 import { Area, AreaCategory, Category, Semester } from "./model/types";
 import {
     TOTAL_CREDITS_GOAL,
@@ -91,6 +91,16 @@ const App: React.FC = () => {
         { id: crypto.randomUUID(), year: 2026, term: "SoSe", semesters: [] },
     ]);
 
+    function handleAddSlot(term: Term) {
+        const newSlot: Slot = {
+            id: crypto.randomUUID(),
+            year: new Date().getFullYear(),
+            term,
+            semesters: [],
+        };
+        setSlots(prevSlots => [...prevSlots, newSlot]);
+    }
+
     function handleAddSemester(slot: Slot, semester: Semester) {
         const updatedSlot: Slot = { ...slot, semesters: [...slot.semesters, semester] };
         setSlots(prevSlots => prevSlots.map(sl => sl.id === slot.id ? updatedSlot : sl));
@@ -103,8 +113,13 @@ const App: React.FC = () => {
             <main className="container mx-auto p-4 md:p-8">
                 <h2 className="text-lg font-semibold">Slots</h2>
                 <SlotList slots={slots} handleAddSemester={handleAddSemester} />
-
-                {/*TODO: Implement ModuleForm inside the slot*/}
+                {/* Preliminary buttons, do we want to allow naming semesters or do we always take the WiSe/SoSe convention? What about the year? Should we count it up automatically when a new semester is added? */}
+                <button onClick={() => handleAddSlot("WiSe")} className="self-start inline-block px-3 py-1 text-sm bg-blue-600 text-white rounded mt-2 mr-2 mb-4 hover:bg-blue-700">
+                    Add WiSe Slot
+                </button>
+                <button onClick={() => handleAddSlot("SoSe")} className="self-start inline-block px-3 py-1 text-sm bg-blue-600 text-white rounded mt-2 mb-4 hover:bg-blue-700">
+                    Add SoSe Slot
+                </button>
                 <ModuleForm
                     onAddModule={addModule}
                     onUpdateModule={updateModule}
