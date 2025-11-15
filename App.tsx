@@ -114,10 +114,12 @@ const App: React.FC = () => {
                 <h2 className="text-lg font-semibold">Slots</h2>
                 <SlotList slots={slots} handleAddSemester={handleAddSemester} />
                 {/* Preliminary buttons, do we want to allow naming semesters or do we always take the WiSe/SoSe convention? What about the year? Should we count it up automatically when a new semester is added? */}
-                <button onClick={() => handleAddSlot("WiSe")} className="self-start inline-block px-3 py-1 text-sm bg-blue-600 text-white rounded mt-2 mr-2 mb-4 hover:bg-blue-700">
-                    Add WiSe Slot
+                <button onClick={() => handleAddSlot("WiSe")} className="mb-4 mt-2 mr-2 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-tum-blue hover:bg-tum-blue-dark transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                >
+                    Add WiSe Slot 
                 </button>
-                <button onClick={() => handleAddSlot("SoSe")} className="self-start inline-block px-3 py-1 text-sm bg-blue-600 text-white rounded mt-2 mb-4 hover:bg-blue-700">
+                <button onClick={() => handleAddSlot("SoSe")} className="mb-4 mt-2 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-tum-blue hover:bg-tum-blue-dark transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                >
                     Add SoSe Slot
                 </button>
                 <ModuleForm

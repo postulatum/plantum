@@ -24,7 +24,7 @@ function SlotList({ slots, handleAddSemester }: SlotListProps) {
                         <button
                             type="button"
                             onClick={() => onAddSemester("Neues Semester", slot)}
-                            className="self-start inline-block px-3 py-1 text-sm bg-blue-600 text-white rounded mt-2 hover:bg-blue-700"
+                            className="mt-2 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-tum-blue hover:bg-tum-blue-dark transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                         >
                             Neues Semester hinzufügen
                         </button>
