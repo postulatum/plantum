@@ -1,6 +1,6 @@
 # GitHub Pages Deployment Guide
 
-This guide explains how to deploy your TUM Master Credit Tracker to GitHub Pages.
+This guide explains how to deploy your planTUM to GitHub Pages.
 
 ## Prerequisites
 

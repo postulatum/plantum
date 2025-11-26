@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onImport }) => {
                 <div className="flex items-center space-x-4">
                     <TUMLogo />
                     <h1 className="text-xl md:text-3xl font-bold text-white tracking-tight">
-                        Master Credit Tracker
+                       planTUM 
                     </h1>
                 </div>
                 <div className="flex items-center space-x-4">
