@@ -1,17 +1,14 @@
 import { React, useState } from "react";
-import { Semester, type Slot } from "../model/types";
-import SemesterList from "./SemesterList";
+import { Semester, type Slot } from "../../model/types";
+import SemesterList from "./SemesterList/SemesterList";
 
-interface SlotListProps {
-    slots: Slot[];
-    handleAddSemester: (slot: Slot, semester: Semester) => void;
-}
+function SlotList({ slots, handleAddSemester }) {
 
-function SlotList({ slots, handleAddSemester }: SlotListProps) {
     function onAddSemester(semesterName: string, slot: Slot) {
         const newSemester: Semester = { id: crypto.randomUUID(), name: semesterName, modules: [] };
         handleAddSemester(slot, newSemester);
     }
+
     return (
         <div className="flex flex-col gap-4">
             {slots.map((slot, idx) => (

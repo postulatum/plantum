@@ -1,21 +1,13 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 
-const TUMLogo: React.FC = () => (
-    <svg
-        width="60"
-        height="30"
-        viewBox="0 0 100 50"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path d="M0 0 H20 V50 H0 Z" fill="#3070B3" />
-        <path d="M22 0 H42 V50 H22 Z" fill="#3070B3" />
-        <path d="M44 0 H64 V50 H44 Z" fill="#3070B3" />
-        <path d="M72 0 H80 V35 H72 Z" fill="#3070B3" />
-        <path d="M82 0 H90 V35 H82 Z" fill="#3070B3" />
-        <path d="M72 37 H90 V50 H72 Z" fill="#3070B3" />
-    </svg>
+const PlantumLogo = () => (
+    <>
+        <img src="assets/logo_white.svg" height="46" width="32" />
+        <h1 style={{marginLeft: 0}} className="text-xl md:text-3xl font-bold text-white tracking-tight">
+           lanTUM 
+        </h1>
+    </>
 );
 
 interface HeaderProps {
@@ -40,10 +32,7 @@ const Header: React.FC<HeaderProps> = ({ onExport, onImport }) => {
         <header className="bg-tum-blue shadow-md">
             <div className="container mx-auto px-4 py-4 md:px-8 flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                    <TUMLogo />
-                    <h1 className="text-xl md:text-3xl font-bold text-white tracking-tight">
-                       planTUM 
-                    </h1>
+                    <PlantumLogo />
                 </div>
                 <div className="flex items-center space-x-4">
                     {onExport && (

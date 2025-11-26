@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import type { Slot, Semester } from "../model/types";
+import type { Slot, Semester } from "../../../model/types";
 import SemesterCard from "./SemesterCard";
 
-interface SemesterListProps {
-    slot: Slot;
-}
-
-function SemesterList({ slot }: SemesterListProps) {
+function SemesterList({ slot }) {
     // TODO: Later use ActivatedState to choose a semester
     const [activeSemesterId, setActiveSemesterId] = useState<string | null>(null);
 

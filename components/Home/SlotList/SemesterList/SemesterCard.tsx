@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-import type { Slot, Semester } from "../model/types";
+import type { Slot, Semester } from "../../../model/types";
 
-interface SemesterCardProps {
-    semester: Semester;
-}
-
-
-function SemesterCard({ semester }: SemesterCardProps) {
+function SemesterCard({ semester }) {
     // TODO: Later use ActivatedState to choose a semester
 
     const [moduleList, setModuleList] = useState<Semester>(semester.modules);

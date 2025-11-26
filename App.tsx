@@ -9,13 +9,15 @@ import {
 } from "./data/constants";
 import { newModule, newSemester } from "./utils/factory";
 import Header from "./components/Header";
-import ModuleList from "./components/ModuleList";
-import Dashboard from "./components/Dashboard";
-import Overview from "./components/Overview";
-import SemesterManager from "./components/SemesterManager";
+import Footer from "./components/Footer";
+import Home from "./components/Home/Home"
+// import ModuleList from "./components/ModuleList";
+// import Dashboard from "./components/Dashboard";
+// import Overview from "./components/Overview";
+// import SemesterManager from "./components/SemesterManager";
 import { Slot } from "./model/types";
-import SlotList from "./components/SlotList";
-import ModuleForm from "./components/ModuleForm";
+// import SlotList from "./components/SlotList";
+// import ModuleForm from "./components/ModuleForm";
 import {
     loadFromLocalStorage,
     saveToLocalStorage,
@@ -110,34 +112,9 @@ const App: React.FC = () => {
         <div className="min-h-screen bg-gray-50 text-gray-800">
             <Header onExport={handleExport} onImport={handleImport} />
 
-            <main className="container mx-auto p-4 md:p-8">
-                <h2 className="text-lg font-semibold">Slots</h2>
-                <SlotList slots={slots} handleAddSemester={handleAddSemester} />
-                {/* Preliminary buttons, do we want to allow naming semesters or do we always take the WiSe/SoSe convention? What about the year? Should we count it up automatically when a new semester is added? */}
-                <button onClick={() => handleAddSlot("WiSe")} className="mb-4 mt-2 mr-2 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-tum-blue hover:bg-tum-blue-dark transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                    Add WiSe Slot 
-                </button>
-                <button onClick={() => handleAddSlot("SoSe")} className="mb-4 mt-2 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-tum-blue hover:bg-tum-blue-dark transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                    Add SoSe Slot
-                </button>
-                <ModuleForm
-                    onAddModule={addModule}
-                    onUpdateModule={updateModule}
-                    onCancelEdit={handleCancelEdit}
-                    editingModule={editingModule}
-                />
-            </main>
+            <Home />
 
-            <footer className="container mx-auto px-4 md:px-8 py-6 text-center text-xs text-gray-500">
-                <p>
-                    Dieses Tool dient nur zur persönlichen Planung. Es wird
-                    keine Garantie auf Korrektheit oder Vollständigkeit der
-                    Informationen gegeben. Bitte überprüfen Sie alle Angaben mit
-                    den offiziellen TUM-Dokumenten und Ihrer Studienberatung.
-                </p>
-            </footer>
+            <Footer />
         </div>
     );
 };

@@ -1,13 +1,6 @@
 import React from "react";
 
-interface ProgressCardProps {
-    title: string;
-    currentValue: number;
-    goalValue: number;
-    isPrimary?: boolean;
-}
-
-const ProgressCard: React.FC<ProgressCardProps> = ({
+const ProgressCard = ({
     title,
     currentValue,
     goalValue,
