@@ -32,23 +32,24 @@ export enum Area {
 
 type Term = 'WiSe' | 'SoSe';
 
-export interface Slot {
-    id: string
+export interface Slot extends HasId {
     year: number;
     term: Term;
     semesters: Semester[];
 }
 
-export interface Semester {
-    id: string;
+export interface Semester extends HasId {
     name: string;
     modules: Module[];
 }
 
-export interface Module {
-    id: string;
+export interface Module extends HasId {
     name: string;
     credits: number;
     area: Area;
     isTheoretical: boolean;
+}
+
+export interface HasId {
+    id: string;
 }
