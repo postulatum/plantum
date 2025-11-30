@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import type { Slot, Semester } from "../../../model/types";
+import type { Slot, Semester, Module, ID } from "../../../../model/types";
 
-function SemesterCard({ semester }) {
-    // TODO: Later use ActivatedState to choose a semester
 
-    const [moduleList, setModuleList] = useState<Semester>(semester.modules);
+interface SemesterCardProps {
+    semester: Semester;
+    modules: Module[];
+    parentOnAddModule: (semesterId: ID, module: Module) => void;
+}
 
+function SemesterCard({ semester, modules, parentOnAddModule }: SemesterCardProps) {
+    const moduleList = modules.filter(module => semester.moduleIds.includes(module.id));
     return (
         <div className="flex flex-col gap-2">
             <div key={semester.id} className="p-4 bg-white rounded-lg shadow-sm">

@@ -1,10 +1,19 @@
-import type { Area, Module, Semester } from "../model/types";
+import type { Area, Module, Semester, ID, Term, Slot} from "../model/types";
 
-function newSemester(name: string, modules: Module[] = []): Semester {
+function newSlot(year: number, term: Term, semesterIds: ID[] = []): Slot {
+    return {
+        id: crypto.randomUUID(),
+        year,
+        term,
+        semesterIds,
+    };
+}
+
+function newSemester(name: string, moduleIds: ID[] = []): Semester {
     return {
         id: crypto.randomUUID(),
         name,
-        modules,
+        moduleIds,
     };
 }
 
@@ -18,4 +27,4 @@ function newModule(name: string, credits: number, area: Area, isTheoretical: boo
     };
 }
 
-export { newModule, newSemester };
+export { newModule, newSemester, newSlot};

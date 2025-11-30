@@ -30,17 +30,19 @@ export enum Area {
     MISC = 'Anderes (z.B. Bachelor-Anerkennung)',
 }
 
-type Term = 'WiSe' | 'SoSe';
+export type Term = 'WiSe' | 'SoSe';
+
+export type ID = string;
 
 export interface Slot extends HasId {
     year: number;
     term: Term;
-    semesters: Semester[];
+    semesterIds: ID[];
 }
 
 export interface Semester extends HasId {
     name: string;
-    modules: Module[];
+    moduleIds: ID[];
 }
 
 export interface Module extends HasId {
@@ -51,5 +53,5 @@ export interface Module extends HasId {
 }
 
 export interface HasId {
-    id: string;
+    id: ID;
 }

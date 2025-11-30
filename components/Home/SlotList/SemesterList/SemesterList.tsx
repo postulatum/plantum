@@ -1,18 +1,29 @@
 import React, { useState } from "react";
-import type { Slot, Semester } from "../../../model/types";
+import type { Semester, Module, ID } from "../../../../model/types";
 import SemesterCard from "./SemesterCard";
 
-function SemesterList({ semesters, parentOnAddSemester }) {
+interface SemesterListProps {
+    semesters: Semester[];
+    modules: Module[];
+    parentOnAddSemester: (semester: Semester) => void;
+    parentOnAddModule: (semesterId: ID, module: Module) => void;
+}
+
+function SemesterList({ semesters, modules, parentOnAddSemester, parentOnAddModule }: SemesterListProps) {
     // TODO: Later use ActivatedState to choose a semester
     const [activeSemesterId, setActiveSemesterId] = useState<string | null>(null);
 
     const onAddSemester = () => {
-        const semester = {
-            id: "SOMEID",
+        const semester: Semester = {
+            id: crypto.randomUUID(),
             name: "Neues Semester",
-            modules: []
+            moduleIds: []
         };
         parentOnAddSemester(semester);
+    }
+
+    const onAddModule = (semesterId: ID, module: Module) => {
+        parentOnAddModule(semesterId, module);
     }
 
     return (
@@ -24,7 +35,11 @@ function SemesterList({ semesters, parentOnAddSemester }) {
             ) : (
                 <div className="flex flex-row gap-4">
                     {semesters.map((semester, idx) => (
-                        <SemesterCard key={semester.id} semester={semester} />
+                        <SemesterCard
+                            semester={semester}
+                            modules={modules}
+                            parentOnAddModule={onAddModule}
+                        />
                     ))}
                 </div>
             )}

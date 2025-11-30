@@ -1,11 +1,25 @@
 import React, { useState } from "react";
-import type { Slot, Semester } from "../../../model/types";
+import type { Slot, Semester, Module, ID } from "../../../model/types";
 import SemesterList from "./SemesterList/SemesterList";
 
-function SlotCard({ slot, parentOnAddSemester }) {
+interface SlotCardProps {
+    slot: Slot;
+    semesters: Semester[];
+    modules: Module[];
+    parentOnAddSemester: (slotId: ID, semester: Semester) => void;
+    parentOnAddModule: (semesterId: ID, module: Module) => void;
+}
 
-    const onAddSemester = (semester) => {
+function SlotCard({ slot, semesters, modules, parentOnAddSemester, parentOnAddModule }: SlotCardProps) {
+    // Filter semesters that belong to this slot
+    const slotSemesters = semesters.filter(sem => slot.semesterIds.includes(sem.id));
+
+    const onAddSemester = (semester: Semester) => {
         parentOnAddSemester(slot.id, semester);
+    }
+
+    function onAddModule(semesterId: ID, module: Module) {
+        parentOnAddModule(semesterId, module);
     }
 
     return (
@@ -18,8 +32,10 @@ function SlotCard({ slot, parentOnAddSemester }) {
                     {slot.term} {slot.year}
                 </div>
                 <SemesterList
-                    semesters={slot.semesters}
-                    onAddSemester={onAddSemester}
+                    semesters={slotSemesters}
+                    modules={modules}
+                    parentOnAddSemester={onAddSemester}
+                    parentOnAddModule={onAddModule}
                 />
             </div>
         </div>

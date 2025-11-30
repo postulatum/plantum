@@ -1,66 +1,87 @@
 import SlotList from "./SlotList/SlotList";
 import Dashboard from "./Dashboard/Dashboard";
-import { Slot, Area } from "../../model/types";
+import { Slot, Semester, Module, Area, ID } from "../../model/types";
 import { useState } from "react";
 
+const moduleId1 = crypto.randomUUID();
+const semesterId1 = crypto.randomUUID();
+const slotId1 = crypto.randomUUID();
+const slotId2 = crypto.randomUUID();
 export default function Home() {
-    let initialSlots: Slot = [
+    
+    // Normalized state: separate collections
+    const [modules, setModules] = useState<Module[]>([
         {
-            id: "askdhg-asdgjhashjdgl-asjhdg",
+            id: moduleId1,
+            name: "Some weird module",
+            credits: 8,
+            area: Area.FMA,
+            isTheoretical: true,
+        },
+    ]);
+
+    const [semesters, setSemesters] = useState<Semester[]>([
+        {
+            id: semesterId1,
+            name: "The semester of despair",
+            moduleIds: [moduleId1],
+        },
+    ]);
+
+    const [slots, setSlots] = useState<Slot[]>([
+        {
+            id: slotId1,
             year: 2026,
             term: "WiSe",
-            semesters: [
-                {
-                    id: "askdhg-asdgjhashjdgl-asjhdg",
-                    name: "The semester of despair",
-                    modules: [
-                        {
-                            id: "askdhg-asdgjhashjdgl-asjhdg",
-                            name: "Some weird module",
-                            credits: 8,
-                            area: Area.FMA,
-                            isTheoretical: true,
-                        },
-                    ],
-                },
-            ],
+            semesterIds: [semesterId1],
         },
         {
-            id: "alksdhgoiaus-asopdiukajsdhg-asdjghakjshdg",
+            id: slotId2,
             year: 2027,
             term: "SoSe",
-            semesters: [],
+            semesterIds: [],
         },
-    ];
+    ]);
 
-    const [slots, setSlots] = useState(initialSlots);
     const noop = () => {};
 
-    // 1. The central function that handles the deep update
-    const onAddSemester = (targetSlotId, newSemester) => {
-        // We use setSlots with a function to get the latest state (prevSlots)
-        setSlots((prevSlots) =>
-            prevSlots.map((slot) => {
-                // Find the specific slot to update
-                if (slot.id === targetSlotId) {
-                    // A. Create a NEW semesters array with the new semester appended
-                    const newSemesters = [...slot.semesters, newSemester];
 
-                    // B. Return a NEW slot object using the spread operator
-                    return {
-                        ...slot,
-                        semesters: newSemesters, // Assign the new array
-                    };
-                }
-                // For all other slots, return the original reference
-                return slot;
-            }),
+    const onAddSlot = (slot: Slot) => {
+        setSlots((prev) => [...prev, slot]);
+    }
+
+    const onAddSemester = (targetSlotId: ID, semester: Semester) => {
+        setSemesters((prev) => [...prev, semester]);
+        setSlots((prev) =>
+            prev.map((slot) =>
+                slot.id === targetSlotId
+                    ? { ...slot, semesterIds: [...slot.semesterIds, semester.id] }
+                    : slot
+            )
+        );
+    };
+
+    const onAddModule = (targetSemesterId: ID, module: Module) => {
+        setModules((prev) => [...prev, module]);
+        setSemesters((prev) =>
+            prev.map((semester) =>
+                semester.id === targetSemesterId
+                    ? { ...semester, moduleIds: [...semester.moduleIds, module.id] }
+                    : semester
+            )
         );
     };
     return (
         <div className="grid grid-cols-3 gap-4">
             <div className="col-span-2">
-                <SlotList slots={slots} onAddSemester={onAddSemester} />
+                <SlotList
+                    slots={slots}
+                    semesters={semesters}
+                    modules={modules}
+                    parentOnAddSemester={onAddSemester}
+                    parentOnAddModule={onAddModule}
+                    parentOnAddSlot={onAddSlot}
+                />
             </div>
             <div>
                 <Dashboard
