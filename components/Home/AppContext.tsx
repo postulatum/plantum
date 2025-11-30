@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import type { Slot, Semester, Module, ID } from "../model/types";
+import type { Slot, Semester, Module, ID } from "../../model/types.ts";
 
 interface State<T> {
     byId: Record<ID, T>;

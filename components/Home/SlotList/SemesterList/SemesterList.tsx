@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { Semester, Module, ID } from "../../../../model/types";
 import SemesterCard from "./SemesterCard";
-import { AppContext } from "../../../../contexts/AppContext";
+import { AppContext } from "../../AppContext";
 
 interface SemesterListProps {
     slotId: ID;

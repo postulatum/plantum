@@ -4,7 +4,7 @@ import SemesterList from "./SemesterList/SemesterList";
 import {newSlot} from "../../../utils/factory";
 import SlotCard from "./SlotCard";
 import { useContext } from "react";
-import { AppContext } from "../../../contexts/AppContext";
+import { AppContext } from "../AppContext";
 
 
 

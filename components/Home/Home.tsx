@@ -2,7 +2,7 @@ import SlotList from "./SlotList/SlotList";
 import Dashboard from "./Dashboard/Dashboard";
 import { Slot, Semester, Module, Area, ID } from "../../model/types";
 import { useState } from "react";
-import { AppContext, IAppContext , State} from "../../contexts/AppContext";
+import { AppContext, IAppContext , State} from "./AppContext";
 
 const moduleId1 = "c476e6c4-6e6d-4b69-81ef-03b0f7790809";
 const semesterId1 = "b9644d46-fc5d-4c9b-936f-fd2d245f053d";
