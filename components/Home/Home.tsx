@@ -4,10 +4,10 @@ import { Slot, Semester, Module, Area, ID } from "../../model/types";
 import { useState } from "react";
 import { AppContext, IAppContext , State} from "../../contexts/AppContext";
 
-const moduleId1 = crypto.randomUUID();
-const semesterId1 = crypto.randomUUID();
-const slotId1 = crypto.randomUUID();
-const slotId2 = crypto.randomUUID();
+const moduleId1 = "c476e6c4-6e6d-4b69-81ef-03b0f7790809";
+const semesterId1 = "b9644d46-fc5d-4c9b-936f-fd2d245f053d";
+const slotId1 = "d3626192-0741-4d84-b6f7-1afabd7590b1";
+const slotId2 = "89eca537-755c-4d74-ab0c-e579aca6d6dc";
 
 export default function Home() {
     const [modules, setModules] = useState<State<Module>>({

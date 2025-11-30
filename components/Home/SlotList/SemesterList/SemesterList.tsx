@@ -33,6 +33,7 @@ function SemesterList({ slotId, semesterIds }: SemesterListProps) {
                 <div className="flex flex-row gap-4">
                     {semesterIds.map((semesterId, _) => (
                         <SemesterCard
+                            key = {semesterId}
                             semester={semesters.byId[semesterId]}
                         />
                     ))}
