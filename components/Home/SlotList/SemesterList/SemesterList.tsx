@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import type { Semester, Module, ID } from "../../../../model/types";
 import SemesterCard from "./SemesterCard";
+import { AppContext } from "../../../../contexts/AppContext";
 
 interface SemesterListProps {
-    semesters: Semester[];
-    modules: Module[];
-    parentOnAddSemester: (semester: Semester) => void;
-    parentOnAddModule: (semesterId: ID, module: Module) => void;
+    slotId: ID;
+    semesterIds: ID[];
 }
 
-function SemesterList({ semesters, modules, parentOnAddSemester, parentOnAddModule }: SemesterListProps) {
+function SemesterList({ slotId, semesterIds }: SemesterListProps) {
     // TODO: Later use ActivatedState to choose a semester
     const [activeSemesterId, setActiveSemesterId] = useState<string | null>(null);
+    const {addSemester,  semesters} = React.useContext(AppContext);
 
     const onAddSemester = () => {
         const semester: Semester = {
@@ -19,26 +19,21 @@ function SemesterList({ semesters, modules, parentOnAddSemester, parentOnAddModu
             name: "Neues Semester",
             moduleIds: []
         };
-        parentOnAddSemester(semester);
+        addSemester(slotId, semester);
     }
 
-    const onAddModule = (semesterId: ID, module: Module) => {
-        parentOnAddModule(semesterId, module);
-    }
 
     return (
         <div className="overflow-y-auto">
-            {semesters.length === 0 ? (
+            {semesterIds.length === 0 ? (
                 <div className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg">
                     <p className="text-gray-500 text-sm">Keine Semester in diesem Slot.</p>
                 </div>
             ) : (
                 <div className="flex flex-row gap-4">
-                    {semesters.map((semester, idx) => (
+                    {semesterIds.map((semesterId, _) => (
                         <SemesterCard
-                            semester={semester}
-                            modules={modules}
-                            parentOnAddModule={onAddModule}
+                            semester={semesters.byId[semesterId]}
                         />
                     ))}
                 </div>

@@ -3,40 +3,22 @@ import { Semester, Module, Slot, ID } from "../../../model/types";
 import SemesterList from "./SemesterList/SemesterList";
 import {newSlot} from "../../../utils/factory";
 import SlotCard from "./SlotCard";
+import { useContext } from "react";
+import { AppContext } from "../../../contexts/AppContext";
 
 
 
-
-interface SlotListProps {
-    slots: Slot[];
-    semesters: Semester[];
-    modules: Module[];
-    parentOnAddSemester: (slotId: ID, semester: Semester) => void;
-    parentOnAddModule: (semesterId: ID, module: Module) => void;
-    parentOnAddSlot: (slot: Slot) => void;
-}
-
-function SlotList({ slots, semesters, modules, parentOnAddSemester, parentOnAddModule, parentOnAddSlot }: SlotListProps) {
-    function onAddSemester(slotId: ID, semester: Semester) {
-        parentOnAddSemester(slotId, semester);
-    }
-    function onAddModule(semesterId: ID, module: Module) {
-        parentOnAddModule(semesterId, module);
-    }
+function SlotList() {
+    const {slots, addSlot} = useContext(AppContext);
+    
     function onAddSlot(slot: Slot) {
-        parentOnAddSlot(slot);
+        addSlot(slot);
     }
     return (
         <div>
         <div className="flex flex-col gap-4">
-            {slots.map((slot, idx) => (
-                <SlotCard
-                    slot={slot}
-                    semesters={semesters}
-                    modules={modules}
-                    parentOnAddSemester={onAddSemester}
-                    parentOnAddModule={onAddModule}
-                />
+            {slots.allIds.map((slotId, _) => (
+                <SlotCard key={slotId} slot={slots.byId[slotId]} />
             ))}
         </div>
         <div>

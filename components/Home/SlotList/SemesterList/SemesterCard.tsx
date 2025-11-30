@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import type { Slot, Semester, Module, ID } from "../../../../model/types";
+import { modules } from "@/data/modules/modules";
+import { AppContext } from "@/contexts/AppContext";
 
 
 interface SemesterCardProps {
     semester: Semester;
-    modules: Module[];
-    parentOnAddModule: (semesterId: ID, module: Module) => void;
 }
 
-function SemesterCard({ semester, modules, parentOnAddModule }: SemesterCardProps) {
-    const moduleList = modules.filter(module => semester.moduleIds.includes(module.id));
+function SemesterCard({ semester}: SemesterCardProps) {
+    const { modules } = React.useContext(AppContext)!;
+
+    const moduleList = semester.moduleIds.map((moduleId) => modules.byId[moduleId]);
     return (
         <div className="flex flex-col gap-2">
             <div key={semester.id} className="p-4 bg-white rounded-lg shadow-sm">
