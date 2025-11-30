@@ -1,18 +1,18 @@
 import { Category } from "../model/category";
 
-// The version of this app.
-export const GLOBAL_APP_VERSION = "0.0.0";
+export class GLOBAL {
 
+    public static TOTAL_CREDITS_GOAL: number = 120;
 
-export const TOTAL_CREDITS_GOAL: number = 120;
+    public static GOALS: Map<Category, number> = new Map([
+        [Category.ELECTIVE, 43],
+        [Category.PROFILE, 10],
+        [Category.SOFT_SKILLS, 6],
+        [Category.IDP, 16],
+        [Category.THESIS, 30],
+        [Category.SEMINAR, 5],
+        [Category.PRACTICAL, 10],
+        [Category.MISC, 0],
+    ]);
+};
 
-export const GOALS: Map<Category, number> = new Map([
-    [Category.ELECTIVE, 43],
-    [Category.PROFILE, 10],
-    [Category.SOFT_SKILLS, 6],
-    [Category.IDP, 16],
-    [Category.THESIS, 30],
-    [Category.SEMINAR, 5],
-    [Category.PRACTICAL, 10],
-    [Category.MISC, 0],
-]);

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-import { GOALS } from "../../../data/constants";
+import { GLOBAL } from "../../../data/constants";
 import { Category } from "../../../model/category";
 import ProgressCard from "./ProgressCard";
 
@@ -35,7 +35,7 @@ const Dashboard = ({
     useOverflowForProfile,
     onToggleOverflowForProfile,
 }: DashboardProps) => {
-    const orderedCategories = [...GOALS.keys()];
+    const orderedCategories = [...GLOBAL.GOALS.keys()];
 
     return (
         <div className="space-y-6">
@@ -68,14 +68,14 @@ const Dashboard = ({
                         key={category}
                         title={category}
                         currentValue={0}
-                        goalValue={GOALS[category]}
+                        goalValue={GLOBAL.GOALS[category]}
                     />
                 ))}
                 <ProgressCard
                     key={Category.PROFILE_BUILDING}
                     title={Category.PROFILE_BUILDING}
                     currentValue={3}
-                    goalValue={GOALS[Category.PROFILE_BUILDING]}
+                    goalValue={GLOBAL.GOALS[Category.PROFILE_BUILDING]}
                 />
                 <ProgressCard
                     title="Theoretische Informatik"
@@ -86,7 +86,7 @@ const Dashboard = ({
                     key={Category.INFORMATICS}
                     title={Category.INFORMATICS}
                     currentValue={1}
-                    goalValue={GOALS[Category.INFORMATICS]}
+                    goalValue={GLOBAL.GOALS[Category.INFORMATICS]}
                 />
             </div>
 
