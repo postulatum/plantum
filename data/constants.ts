@@ -1,4 +1,4 @@
-import { Category } from "../model/types";
+import { Category } from "../model/category";
 
 // The version of this app.
 export const GLOBAL_APP_VERSION = "0.0.0";

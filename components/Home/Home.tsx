@@ -1,8 +1,12 @@
 import SlotList from "./SlotList/SlotList";
 import Dashboard from "./Dashboard/Dashboard";
-import { Slot, Semester, Module, Area, ID } from "../../model/types";
+import { Slot } from "../../model/slot";
+import { Semester } from "../../model/semester";
+import { Module } from "../../model/module";
+import { Area } from "../../model/area";
+import { Id } from "../../model/id";
 import { useState } from "react";
-import { AppContext, IAppContext , State} from "./AppContext";
+import { AppContext, IAppContext, State } from "./AppContext";
 
 const moduleId1 = "c476e6c4-6e6d-4b69-81ef-03b0f7790809";
 const semesterId1 = "b9644d46-fc5d-4c9b-936f-fd2d245f053d";
@@ -18,7 +22,7 @@ export default function Home() {
                 credits: 8,
                 area: Area.FMA,
                 isTheoretical: true,
-            }
+            },
         },
         allIds: [moduleId1],
     });
@@ -29,7 +33,7 @@ export default function Home() {
                 id: semesterId1,
                 name: "The semester of despair",
                 moduleIds: [moduleId1],
-            }
+            },
         },
         allIds: [semesterId1],
     });
@@ -47,7 +51,7 @@ export default function Home() {
                 year: 2027,
                 term: "SoSe",
                 semesterIds: [],
-            }
+            },
         },
         allIds: [slotId1, slotId2],
     });
@@ -65,7 +69,7 @@ export default function Home() {
         console.log("Added slot:", slot);
     };
 
-    const addSemester = (targetSlotId: ID, semester: Semester) => {
+    const addSemester = (targetSlotId: Id, semester: Semester) => {
         setSemesters((prev) => ({
             byId: {
                 ...prev.byId,
@@ -79,14 +83,17 @@ export default function Home() {
                 ...prev.byId,
                 [targetSlotId]: {
                     ...prev.byId[targetSlotId],
-                    semesterIds: [...prev.byId[targetSlotId].semesterIds, semester.id],
+                    semesterIds: [
+                        ...prev.byId[targetSlotId].semesterIds,
+                        semester.id,
+                    ],
                 },
             },
             allIds: prev.allIds,
         }));
     };
 
-    const addModule = (targetSemesterId: ID, module: Module) => {
+    const addModule = (targetSemesterId: Id, module: Module) => {
         setModules((prev) => ({
             byId: {
                 ...prev.byId,
@@ -100,7 +107,10 @@ export default function Home() {
                 ...prev.byId,
                 [targetSemesterId]: {
                     ...prev.byId[targetSemesterId],
-                    moduleIds: [...prev.byId[targetSemesterId].moduleIds, module.id],
+                    moduleIds: [
+                        ...prev.byId[targetSemesterId].moduleIds,
+                        module.id,
+                    ],
                 },
             },
             allIds: prev.allIds,
@@ -109,14 +119,16 @@ export default function Home() {
 
     return (
         <AppContext.Provider
-            value={{
-                slots: slots,
-                semesters: semesters,
-                modules: modules,
-                addSlot: addSlot,
-                addSemester: addSemester,
-                addModule: addModule,
-            } as IAppContext}
+            value={
+                {
+                    slots: slots,
+                    semesters: semesters,
+                    modules: modules,
+                    addSlot: addSlot,
+                    addSemester: addSemester,
+                    addModule: addModule,
+                } as IAppContext
+            }
         >
             <div className="grid grid-cols-3 gap-4">
                 <div className="col-span-2">

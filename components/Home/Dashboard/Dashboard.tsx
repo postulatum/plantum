@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
 import { GOALS } from "../../../data/constants";
-import { Category } from "../../../model/types";
+import { Category } from "../../../model/category";
 import ProgressCard from "./ProgressCard";
 
 const InfoIcon = () => (
@@ -33,9 +33,8 @@ const Dashboard = ({
     totalCredits,
     totalGoal,
     useOverflowForProfile,
-    onToggleOverflowForProfile
+    onToggleOverflowForProfile,
 }: DashboardProps) => {
-
     const orderedCategories = [...GOALS.keys()];
 
     return (
@@ -55,11 +54,10 @@ const Dashboard = ({
                     Der Schwerpunkt ist das Fachgebiet mit den meisten Credits.
                 </p>
                 <ul className="list-disc list-inside text-sm text-gray-700 mt-2 space-y-1">
-                    <li className="text-gray-800" >
-                        "nicht erfüllt"
-                    </li>
+                    <li className="text-gray-800">"nicht erfüllt"</li>
                     <li className="text-gray-800">
-                        Mindestens <strong>8 ECTS</strong> in zwei weiteren Fachgebieten nicht erfüllt.
+                        Mindestens <strong>8 ECTS</strong> in zwei weiteren
+                        Fachgebieten nicht erfüllt.
                     </li>
                 </ul>
             </div>
@@ -93,7 +91,7 @@ const Dashboard = ({
             </div>
 
             {/* Gray separator line before overflow credits */}
-            {(
+            {
                 <div className="border-t-2 border-gray-300 pt-6">
                     <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
                         <div className="flex justify-between items-center mb-3">
@@ -116,12 +114,13 @@ const Dashboard = ({
                                 className="w-5 h-5 text-tum-blue rounded focus:ring-tum-blue focus:ring-2"
                             />
                             <span className="text-sm text-gray-700">
-                                Bis zu 10 Credits als Profilbildung verwenden `(${0} ECTS werden verwendet)`
+                                Bis zu 10 Credits als Profilbildung verwenden
+                                `(${0} ECTS werden verwendet)`
                             </span>
                         </label>
                     </div>
                 </div>
-            )}
+            }
 
             {false && (
                 <div>
@@ -134,7 +133,7 @@ const Dashboard = ({
                         >
                             <div className="flex justify-between items-center">
                                 <span className="font-medium text-gray-800">
-                                    {" "}{" "}
+                                    {" "}
                                 </span>
                                 <span className="font-bold text-tum-blue-dark">
                                     {0} ECTS
@@ -149,4 +148,3 @@ const Dashboard = ({
 };
 
 export default Dashboard;
-
