@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import type { Slot, Semester } from "../../../model/types";
+import type { Slot, Semester, Module, ID } from "../../../../model/types";
+import { modules } from "@/data/modules/modules";
+import { AppContext } from "@/contexts/AppContext";
 
-function SemesterCard({ semester }) {
-    // TODO: Later use ActivatedState to choose a semester
 
-    const [moduleList, setModuleList] = useState<Semester>(semester.modules);
+interface SemesterCardProps {
+    semester: Semester;
+}
 
+function SemesterCard({ semester}: SemesterCardProps) {
+    const { modules } = React.useContext(AppContext)!;
+
+    const moduleList = semester.moduleIds.map((moduleId) => modules.byId[moduleId]);
     return (
         <div className="flex flex-col gap-2">
             <div key={semester.id} className="p-4 bg-white rounded-lg shadow-sm">

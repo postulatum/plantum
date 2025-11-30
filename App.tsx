@@ -83,31 +83,6 @@ const App: React.FC = () => {
     const handleCancelEdit = (v) => { console.log(v); }
     const editingModule = {}
 
-
-    const testModule: Module = newModule("Testmodul", 5, Area.ALG, true);
-    const testSemester: Semester = newSemester("Testsemester", [testModule]);
-
-    // TODO: Remove Dummy slots
-    const [slots, setSlots] = useState<Slot[]>([
-        { id: crypto.randomUUID(), year: 2025, term: "WiSe", semesters: [testSemester] },
-        { id: crypto.randomUUID(), year: 2026, term: "SoSe", semesters: [] },
-    ]);
-
-    function handleAddSlot(term: Term) {
-        const newSlot: Slot = {
-            id: crypto.randomUUID(),
-            year: new Date().getFullYear(),
-            term,
-            semesters: [],
-        };
-        setSlots(prevSlots => [...prevSlots, newSlot]);
-    }
-
-    function handleAddSemester(slot: Slot, semester: Semester) {
-        const updatedSlot: Slot = { ...slot, semesters: [...slot.semesters, semester] };
-        setSlots(prevSlots => prevSlots.map(sl => sl.id === slot.id ? updatedSlot : sl));
-    }
-
     return (
         <div className="min-h-screen bg-gray-50 text-gray-800">
             <Header onExport={handleExport} onImport={handleImport} />

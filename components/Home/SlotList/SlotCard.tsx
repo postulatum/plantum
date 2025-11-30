@@ -1,26 +1,23 @@
 import React, { useState } from "react";
-import type { Slot, Semester } from "../../../model/types";
+import type { Slot, Semester, Module, ID } from "../../../model/types";
 import SemesterList from "./SemesterList/SemesterList";
 
-function SlotCard({ slot, parentOnAddSemester }) {
+interface SlotCardProps {
+    key: ID;
+    slot : Slot;
+}
 
-    const onAddSemester = (semester) => {
-        parentOnAddSemester(slot.id, semester);
-    }
-
+function SlotCard({ slot } : SlotCardProps) {
     return (
         <div
-            key={slot.id}
+           
             className="p-4 bg-gray rounded-lg shadow-xl flex-row"
         >
             <div className="flex-col">
                 <div className="text-xl font-semibold mb-2">
                     {slot.term} {slot.year}
                 </div>
-                <SemesterList
-                    semesters={slot.semesters}
-                    onAddSemester={onAddSemester}
-                />
+                <SemesterList slotId={slot.id} semesterIds={slot.semesterIds}/>
             </div>
         </div>
     );

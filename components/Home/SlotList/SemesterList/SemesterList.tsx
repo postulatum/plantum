@@ -1,30 +1,40 @@
 import React, { useState } from "react";
-import type { Slot, Semester } from "../../../model/types";
+import type { Semester, Module, ID } from "../../../../model/types";
 import SemesterCard from "./SemesterCard";
+import { AppContext } from "../../../../contexts/AppContext";
 
-function SemesterList({ semesters, parentOnAddSemester }) {
+interface SemesterListProps {
+    slotId: ID;
+    semesterIds: ID[];
+}
+
+function SemesterList({ slotId, semesterIds }: SemesterListProps) {
     // TODO: Later use ActivatedState to choose a semester
     const [activeSemesterId, setActiveSemesterId] = useState<string | null>(null);
+    const {addSemester,  semesters} = React.useContext(AppContext);
 
     const onAddSemester = () => {
-        const semester = {
-            id: "SOMEID",
+        const semester: Semester = {
+            id: crypto.randomUUID(),
             name: "Neues Semester",
-            modules: []
+            moduleIds: []
         };
-        parentOnAddSemester(semester);
+        addSemester(slotId, semester);
     }
+
 
     return (
         <div className="overflow-y-auto">
-            {semesters.length === 0 ? (
+            {semesterIds.length === 0 ? (
                 <div className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg">
                     <p className="text-gray-500 text-sm">Keine Semester in diesem Slot.</p>
                 </div>
             ) : (
                 <div className="flex flex-row gap-4">
-                    {semesters.map((semester, idx) => (
-                        <SemesterCard key={semester.id} semester={semester} />
+                    {semesterIds.map((semesterId, _) => (
+                        <SemesterCard
+                            semester={semesters.byId[semesterId]}
+                        />
                     ))}
                 </div>
             )}
