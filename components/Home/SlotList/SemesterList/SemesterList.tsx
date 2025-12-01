@@ -3,6 +3,7 @@ import { Semester } from "@/model/semester";
 import { Id } from "@/model/id";
 import SemesterCard from "./SemesterCard";
 import { AppContext } from "@/components/Home/AppContext";
+import { get } from "http";
 
 interface SemesterListProps {
     slotId: Id;
@@ -10,11 +11,8 @@ interface SemesterListProps {
 }
 
 function SemesterList({ slotId, semesterIds }: SemesterListProps) {
-    // TODO: Later use ActivatedState to choose a semester
-    const [activeSemesterId, setActiveSemesterId] = useState<string | null>(
-        null,
-    );
-    const { addSemester, semesters } = React.useContext(AppContext);
+
+    const { addSemester, semesters, getActiveSemester, setActiveSemester } = React.useContext(AppContext);
 
     const onAddSemester = () => {
         const semester: Semester = {
@@ -24,6 +22,14 @@ function SemesterList({ slotId, semesterIds }: SemesterListProps) {
         };
         addSemester(slotId, semester);
     };
+
+    const onToggleActiveSemester = (semesterId: Id) => {
+        if (getActiveSemester(slotId) === semesterId) {  // Toggle off if already active
+            setActiveSemester(slotId, null);
+            return;
+        }
+        setActiveSemester(slotId, semesterId);
+    }
 
     return (
         <div className="overflow-y-auto">
@@ -38,6 +44,8 @@ function SemesterList({ slotId, semesterIds }: SemesterListProps) {
                     {semesterIds.map((semesterId, _) => (
                         <SemesterCard
                             semester={semesters.byId[semesterId]}
+                            isActive={getActiveSemester(slotId) === semesterId}
+                            handleToggleActive={() => onToggleActiveSemester(semesterId)}
                         />
                     ))}
                 </div>

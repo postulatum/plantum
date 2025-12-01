@@ -17,6 +17,8 @@ interface IAppContext {
     addSlot: (slot: Slot) => void;
     addSemester: (slotId: Id, semester: Semester) => void;
     addModule: (semesterId: Id, module: Module) => void;
+    setActiveSemester: (slotId: Id, semesterId: Id) => void;
+    getActiveSemester: (slotId: Id) => Id | null;
 }
 
 const AppContext = createContext<IAppContext | null>(null);

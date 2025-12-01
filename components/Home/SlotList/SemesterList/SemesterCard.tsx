@@ -5,19 +5,32 @@ import ModuleList from "./ModuleList/ModuleList";
 
 interface SemesterCardProps {
     semester: Semester;
+    isActive: boolean;
+    handleToggleActive: () => void;
 }
+1
+function SemesterCard({ semester, isActive, handleToggleActive }: SemesterCardProps) {
 
-function SemesterCard({ semester }: SemesterCardProps) {
-    const { modules } = React.useContext(AppContext)!;
+    const [isHovered, setIsHovered] = React.useState(false);
 
-    const moduleList = semester.moduleIds.map(
-        (moduleId) => modules.byId[moduleId],
-    );
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {isHovered && (
+                <div className="absolute top-2 right-2">
+                    <input
+                        type="checkbox"
+                        checked={isActive}
+                        onChange={handleToggleActive}
+                        className="w-5 h-5 cursor-pointer"
+                    />
+                </div>
+            )}
             <div
                 key={semester.id}
-                className="p-4 bg-white rounded-lg shadow-sm"
+                className={`p-4 bg-white rounded-lg shadow-sm border-2 ${isActive ? 'border-tum-blue' : 'border-transparent'}`}
             >
                 {semester.name}
                 <ModuleList moduleIds={semester.moduleIds} />

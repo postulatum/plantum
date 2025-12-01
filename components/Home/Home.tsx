@@ -56,6 +56,21 @@ export default function Home() {
         allIds: [slotId1, slotId2],
     });
 
+
+    // Record of {[slotId]: activeSemesterId}
+    const [activeSemestersBySlot, setActiveSemestersBySlot] = useState<Record<Id, Id>>({});
+
+    const setActiveSemester = (slotId: Id, semesterId: Id) => {
+        setActiveSemestersBySlot((prev) => ({
+            ...prev,
+            [slotId]: semesterId,
+        }));
+    }
+
+    const getActiveSemester = (slotId: Id): Id | null => {
+        return activeSemestersBySlot[slotId] || null;
+    }
+
     const noop = () => {};
 
     const addSlot = (slot: Slot) => {
@@ -127,6 +142,8 @@ export default function Home() {
                     addSlot: addSlot,
                     addSemester: addSemester,
                     addModule: addModule,
+                    setActiveSemester: setActiveSemester,
+                    getActiveSemester: getActiveSemester,
                 } as IAppContext
             }
         >
