@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { modules } from "@/data/modules/modules";
 import { AppContext } from "../../AppContext";
-import { Semester } from "../../../../model/semester";
+import { Semester } from "@/model/semester";
+import ModuleList from "./ModuleList/ModuleList";
 
 interface SemesterCardProps {
     semester: Semester;
@@ -20,21 +21,7 @@ function SemesterCard({ semester }: SemesterCardProps) {
                 className="p-4 bg-white rounded-lg shadow-sm"
             >
                 {semester.name}
-                <div className="mt-4">
-                    {moduleList.length === 0 ? (
-                        <p className="text-gray-500 text-sm">
-                            Keine Module in diesem Semester.
-                        </p>
-                    ) : (
-                        <ul className="list-disc list-inside">
-                            {moduleList.map((module) => (
-                                <li key={module.id} className="text-gray-800">
-                                    {module.name} ({module.credits} ECTS)
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+                <ModuleList moduleIds={semester.moduleIds} />
             </div>
         </div>
     );
