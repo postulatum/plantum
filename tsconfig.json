@@ -21,7 +21,10 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@/components/*": ["./components/*"],
+      "@/model/*": ["./model/*"],
+      "@/data/*": ["./data/*"]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true

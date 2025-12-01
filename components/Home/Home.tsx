@@ -1,10 +1,10 @@
 import SlotList from "./SlotList/SlotList";
 import Dashboard from "./Dashboard/Dashboard";
-import { Slot } from "../../model/slot";
-import { Semester } from "../../model/semester";
-import { Module } from "../../model/module";
-import { Area } from "../../model/area";
-import { Id } from "../../model/id";
+import { Slot } from "@/model/slot";
+import { Semester } from "@/model/semester";
+import { Module } from "@/model/module";
+import { Area } from "@/model/area";
+import { Id } from "@/model/id";
 import { useState } from "react";
 import { AppContext, IAppContext, State } from "./AppContext";
 

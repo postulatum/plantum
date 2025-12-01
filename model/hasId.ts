@@ -1,3 +1,5 @@
+import { Id } from "./id";
+
 export interface HasId {
-    id: string;
+    id: Id;
 }

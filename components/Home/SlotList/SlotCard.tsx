@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Slot } from "../../model/slot";
-import { Id } from "../../model/id";
+import React from "react";
+import { Slot } from "@/model/slot";
+import { Id } from "@/model/id";
 import SemesterList from "./SemesterList/SemesterList";
 
 interface SlotCardProps {

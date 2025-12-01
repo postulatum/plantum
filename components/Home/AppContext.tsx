@@ -1,9 +1,8 @@
-import React, { createContext, useContext } from "react";
-import { Slot } from "../../model/slot";
-import { Semester } from "../../model/semester";
-import { Module } from "../../model/module";
-import { Area } from "../../model/area";
-import { Id } from "../../model/id";
+import { createContext } from "react";
+import { Slot } from "@/model/slot";
+import { Semester } from "@/model/semester";
+import { Module } from "@/model/module";
+import { Id } from "@/model/id";
 
 interface State<T> {
     byId: Record<Id, T>;

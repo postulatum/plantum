@@ -1,10 +1,9 @@
-import { React, useState } from "react";
-import { Slot } from "../../model/slot";
-import SemesterList from "./SemesterList/SemesterList";
-import { newSlot } from "../../../utils/factory";
+import { React } from "react";
+import { Slot } from "@/model/slot";
+import { newSlot } from "@/utils/factory";
 import SlotCard from "./SlotCard";
 import { useContext } from "react";
-import { AppContext } from "../AppContext";
+import { AppContext } from "@/components/Home/AppContext";
 
 function SlotList() {
     const { slots, addSlot } = useContext(AppContext);

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { modules } from "@/data/modules/modules";
-import { AppContext } from "../../AppContext";
+import React from "react";
+import { AppContext } from "@/components/Home/AppContext";
 import { Semester } from "@/model/semester";
 import ModuleList from "./ModuleList/ModuleList";
 

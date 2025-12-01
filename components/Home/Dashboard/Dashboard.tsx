@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
-import { GLOBAL } from "../../../data/constants";
-import { Category } from "../../../model/category";
+import { GLOBAL } from "@/data/constants";
+import { Category } from "@/model/category";
 import ProgressCard from "./ProgressCard";
 
 const InfoIcon = () => (

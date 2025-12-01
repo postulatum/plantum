@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { Slot } from "../../../../model/slot";
-import { Semester } from "../../../../model/semester";
-import { Module } from "../../../../model/module";
-import { Area } from "../../../../model/area";
-import { Id } from "../../../../model/id";
+import { Semester } from "@/model/semester";
+import { Id } from "@/model/id";
 import SemesterCard from "./SemesterCard";
-import { AppContext } from "../../AppContext";
+import { AppContext } from "@/components/Home/AppContext";
 
 interface SemesterListProps {
     slotId: Id;
@@ -40,7 +37,6 @@ function SemesterList({ slotId, semesterIds }: SemesterListProps) {
                 <div className="flex flex-row gap-4">
                     {semesterIds.map((semesterId, _) => (
                         <SemesterCard
-                            key={semesterId}
                             semester={semesters.byId[semesterId]}
                         />
                     ))}

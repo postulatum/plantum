@@ -1,6 +1,6 @@
 import { Id } from '@/model/id';
 import React from 'react';
-import { AppContext } from '../../../../Home/AppContext';
+import { AppContext } from '@/components/Home/AppContext';
 
 interface ModuleListProps {
     moduleIds: Id[];
