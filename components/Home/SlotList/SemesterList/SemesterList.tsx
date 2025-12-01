@@ -20,6 +20,10 @@ function SemesterList({ slotId, semesterIds }: SemesterListProps) {
             name: "Neues Semester",
             moduleIds: [],
         };
+        
+        if (semesterIds.length === 0) {
+            setActiveSemester(slotId, semester.id);
+        }
         addSemester(slotId, semester);
     };
 
