@@ -14,7 +14,8 @@ const slotId1 = "d3626192-0741-4d84-b6f7-1afabd7590b1";
 const slotId2 = "89eca537-755c-4d74-ab0c-e579aca6d6dc";
 
 export default function Home() {
-    const [modules, setModules] = useState<State<Module>>({
+    /* Initial Data */
+    const initialModules: State<Module> = {
         byId: {
             [moduleId1]: {
                 id: moduleId1,
@@ -25,9 +26,9 @@ export default function Home() {
             },
         },
         allIds: [moduleId1],
-    });
+    };
 
-    const [semesters, setSemesters] = useState<State<Semester>>({
+    const initialSemesters: State<Semester> = {
         byId: {
             [semesterId1]: {
                 id: semesterId1,
@@ -36,9 +37,9 @@ export default function Home() {
             },
         },
         allIds: [semesterId1],
-    });
+    };
 
-    const [slots, setSlots] = useState<State<Slot>>({
+    const initialSlots: State<Slot> = {
         byId: {
             [slotId1]: {
                 id: slotId1,
@@ -54,12 +55,22 @@ export default function Home() {
             },
         },
         allIds: [slotId1, slotId2],
-    });
+    };
 
+    const initialActiveSemestersBySlot: Record<Id, Id> = {
+        [slotId1]: semesterId1,
+    };
+
+    /* States */
+    const [modules, setModules] = useState<State<Module>>(initialModules);
+    const [semesters, setSemesters] = useState<State<Semester>>(initialSemesters);
+    const [slots, setSlots] = useState<State<Slot>>(initialSlots);
 
     // Record of {[slotId]: activeSemesterId}
-    const [activeSemestersBySlot, setActiveSemestersBySlot] = useState<Record<Id, Id>>({});
+    const [activeSemestersBySlot, setActiveSemestersBySlot] = useState<Record<Id, Id>>(initialActiveSemestersBySlot);
 
+
+    /* Actions */
     const setActiveSemester = (slotId: Id, semesterId: Id) => {
         setActiveSemestersBySlot((prev) => ({
             ...prev,
@@ -71,7 +82,7 @@ export default function Home() {
         return activeSemestersBySlot[slotId] || null;
     }
 
-    const noop = () => {};
+    const noop = () => { };
 
     const addSlot = (slot: Slot) => {
         setSlots((prev) => ({
