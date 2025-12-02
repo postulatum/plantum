@@ -65,17 +65,15 @@ const Dashboard = ({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
                 {orderedCategories.map((category) => (
                     <ProgressCard
-                        key={category}
                         title={category}
                         currentValue={0}
                         goalValue={GLOBAL.GOALS[category]}
                     />
                 ))}
                 <ProgressCard
-                    key={Category.PROFILE_BUILDING}
-                    title={Category.PROFILE_BUILDING}
+                    title={Category.PROFILE}
                     currentValue={3}
-                    goalValue={GLOBAL.GOALS[Category.PROFILE_BUILDING]}
+                    goalValue={GLOBAL.GOALS[Category.PROFILE]}
                 />
                 <ProgressCard
                     title="Theoretische Informatik"
@@ -83,10 +81,9 @@ const Dashboard = ({
                     goalValue={10}
                 />
                 <ProgressCard
-                    key={Category.INFORMATICS}
-                    title={Category.INFORMATICS}
+                    title={Category.ELECTIVE}
                     currentValue={1}
-                    goalValue={GLOBAL.GOALS[Category.INFORMATICS]}
+                    goalValue={GLOBAL.GOALS[Category.ELECTIVE]}
                 />
             </div>
 

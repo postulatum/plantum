@@ -33,7 +33,7 @@ export default function Home() {
             [semesterId1]: {
                 id: semesterId1,
                 name: "The semester of despair",
-                moduleIds: [moduleId1],
+                moduleIds: [moduleId1, moduleId1, moduleId1, moduleId1, moduleId1, moduleId1],
             },
         },
         allIds: [semesterId1],

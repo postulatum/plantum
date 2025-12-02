@@ -10,7 +10,7 @@ interface SlotCardProps {
 
 function SlotCard({ slot }: SlotCardProps) {
     return (
-        <div className="p-4 bg-gray rounded-lg shadow-xl flex-row">
+        <div className="m-2 p-4 bg-gray rounded-lg shadow-xl flex-row">
             <div className="flex-col">
                 <div className="text-xl font-semibold mb-2">
                     {slot.term} {slot.year}

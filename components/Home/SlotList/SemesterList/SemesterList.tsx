@@ -55,13 +55,13 @@ function SemesterList({ slotId, semesterIds }: SemesterListProps) {
                 </div>
             )}
 
-            <button
+            {semesterIds.length < 3 && <button
                 type="button"
                 onClick={() => onAddSemester()}
                 className="mt-2 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-tum-blue hover:bg-tum-blue-dark transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
                 Neues Semester hinzufügen
-            </button>
+            </button>}
         </div>
     );
 }
