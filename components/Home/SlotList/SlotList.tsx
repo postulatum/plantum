@@ -1,4 +1,3 @@
-import { React } from "react";
 import { Slot } from "@/model/slot";
 import { newSlot } from "@/utils/factory";
 import SlotCard from "./SlotCard";

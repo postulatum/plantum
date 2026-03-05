@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useMemo } from "react";
-import type { Module, Term } from "./model/types";
-import { Area, AreaCategory, Category, Semester } from "./model/types";
-import {
-    TOTAL_CREDITS_GOAL,
-    CATEGORY_GOALS,
-    LOCAL_STORAGE_KEYS,
-    GLOBAL_APP_VERSION,
-} from "./data/constants";
-import { newModule, newSemester } from "./utils/factory";
+//import type { Module, Term } from "./model/types";
+//import { Area, AreaCategory, Category, Semester } from "./model/types";
+//import {
+//    TOTAL_CREDITS_GOAL,
+//    CATEGORY_GOALS,
+//    LOCAL_STORAGE_KEYS,
+//    GLOBAL_APP_VERSION,
+//} from "./data/constants";
+//import { newModule, newSemester } from "./utils/factory";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home/Home"
-import { Slot } from "./model/types";
-import {
-    loadFromLocalStorage,
-    saveToLocalStorage,
-} from "./services/localStorageService";
+//import { Slot } from "./model/types";
+//import {
+//    loadFromLocalStorage,
+//    saveToLocalStorage,
+//} from "./services/LocalStorageService.ts";
 
 type View = "planner" | "overview";
 

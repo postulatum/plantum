@@ -6,7 +6,6 @@ interface ModuleListProps {
     moduleIds: Id[];
 }
 
-
 function ModuleList({ moduleIds }: ModuleListProps) {
     const { modules } = React.useContext(AppContext)!;
 

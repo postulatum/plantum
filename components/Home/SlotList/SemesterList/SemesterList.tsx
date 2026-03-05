@@ -3,7 +3,6 @@ import { Semester } from "@/model/semester";
 import { Id } from "@/model/id";
 import SemesterCard from "./SemesterCard";
 import { AppContext } from "@/components/Home/AppContext";
-import { get } from "http";
 
 interface SemesterListProps {
     slotId: Id;
